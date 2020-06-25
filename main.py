@@ -66,20 +66,19 @@ def auth():
     """
     Create JWT token based on email.
     """
-    request_data = request.get_json()
-    email = request_data.get('email')
-    password = request_data.get('password')
-    if not email:
+    request_data = request.json
+    
+    if 'email' not in request_data:
         LOG.error("No email provided")
         return jsonify({"message": "Missing parameter: email"}, 400)
-    if not password:
+    if 'password' not in request_data:
         LOG.error("No password provided")
         return jsonify({"message": "Missing parameter: password"}, 400)
-    body = {'email': email, 'password': password}
+    body = {'email': request_data['email'], 'password': request_data['password']}
 
     user_data = body
-
-    return jsonify(token=_get_jwt(user_data).decode('utf-8'))
+    
+    return jsonify({"token":_get_jwt(user_data).decode('utf-8')})
 
 
 @APP.route('/contents', methods=['GET'])
