@@ -1,0 +1,1130 @@
+Microsoft Windows [Version 10.0.18363.900]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\balazs.szalai>cd C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --env-file=env_file --tag jwt-api-test .
+unknown flag: --env-file
+See 'docker build --help'.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --env-file env_file --tag jwt-api-test .
+unknown flag: --env-file
+See 'docker build --help'.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --help
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+Options:
+      --add-host list           Add a custom host-to-IP mapping (host:ip)
+      --build-arg list          Set build-time variables
+      --cache-from strings      Images to consider as cache sources
+      --cgroup-parent string    Optional parent cgroup for the container
+      --compress                Compress the build context using gzip
+      --cpu-period int          Limit the CPU CFS (Completely Fair
+                                Scheduler) period
+      --cpu-quota int           Limit the CPU CFS (Completely Fair
+                                Scheduler) quota
+  -c, --cpu-shares int          CPU shares (relative weight)
+      --cpuset-cpus string      CPUs in which to allow execution (0-3, 0,1)
+      --cpuset-mems string      MEMs in which to allow execution (0-3, 0,1)
+      --disable-content-trust   Skip image verification (default true)
+  -f, --file string             Name of the Dockerfile (Default is
+                                'PATH/Dockerfile')
+      --force-rm                Always remove intermediate containers
+      --iidfile string          Write the image ID to the file
+      --isolation string        Container isolation technology
+      --label list              Set metadata for an image
+  -m, --memory bytes            Memory limit
+      --memory-swap bytes       Swap limit equal to memory plus swap:
+                                '-1' to enable unlimited swap
+      --network string          Set the networking mode for the RUN
+                                instructions during build (default "default")
+      --no-cache                Do not use cache when building the image
+      --platform string         Set platform if server is multi-platform
+                                capable
+      --pull                    Always attempt to pull a newer version of
+                                the image
+  -q, --quiet                   Suppress the build output and print image
+                                ID on success
+      --rm                      Remove intermediate containers after a
+                                successful build (default true)
+      --security-opt strings    Security options
+      --shm-size bytes          Size of /dev/shm
+      --squash                  Squash newly built layers into a single
+                                new layer
+      --stream                  Stream attaches to server to negotiate
+                                build context
+  -t, --tag list                Name and optionally a tag in the
+                                'name:tag' format
+      --target string           Set the target build stage to build.
+      --ulimit ulimit           Ulimit options (default [])
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+error during connect: Post http://%2F%2F.%2Fpipe%2Fdocker_engine/v1.40/build?buildargs=%7B%7D&cachefrom=%5B%5D&cgroupparent=&cpuperiod=0&cpuquota=0&cpusetcpus=&cpusetmems=&cpushares=0&dockerfile=Dockerfile&labels=%7B%7D&memory=0&memswap=0&networkmode=default&rm=1&session=d602h06rt1g4surg4exryuyn4&shmsize=0&t=jwt-api-test&target=&ulimits=null&version=1: open //./pipe/docker_engine: The system cannot find the file specified. In the default daemon configuration on Windows, the docker client must be run elevated to connect. This error may also indicate that the docker daemon is not running.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 47f86d40eef3
+Step 3/6 : WORKDIR /app
+ ---> Running in f6dd5e33a6b7
+Removing intermediate container f6dd5e33a6b7
+ ---> 6eb3aef8fc2e
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 5164bbcc82d2
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 5164bbcc82d2
+ ---> 1fe9c65db9a9
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in 7da6028c41e7
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, Werkzeug, itsdangerous, click, MarkupSafe, Jinja2, flask, gunicorn, zipp, importlib-metadata, pluggy, six, pyparsing, packaging, wcwidth, py, attrs, more-itertools, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container 7da6028c41e7
+ ---> 0b027968487a
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in 4656a92ea072
+Removing intermediate container 4656a92ea072
+ ---> a22d6dfe4d46
+Successfully built a22d6dfe4d46
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run jwt-api-test
+[2020-06-25 15:10:48 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 15:10:48 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 15:10:48 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 15:10:48 +0000] [8] [INFO] Booting worker with pid: 8
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p :8080 --env-file=.env jwt-api-test
+[2020-06-25 15:17:17 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 15:17:17 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 15:17:17 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 15:17:17 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 15:17:18,061 - main - DEBUG - Starting with log level: DEBUG
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 15:19:35 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 15:19:35 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 15:19:35 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 15:19:35 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 15:19:35,110 - main - DEBUG - Starting with log level: DEBUG
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 9f18ab3c36c7
+Step 3/6 : WORKDIR /app
+ ---> Running in 977c07dafc6c
+Removing intermediate container 977c07dafc6c
+ ---> 82fd1c2987ba
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 64696e5adcfe
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 64696e5adcfe
+ ---> 971425168a0a
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in 48a293743ac4
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, Werkzeug, itsdangerous, MarkupSafe, Jinja2, click, flask, gunicorn, py, attrs, more-itertools, zipp, importlib-metadata, pluggy, wcwidth, six, pyparsing, packaging, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container 48a293743ac4
+ ---> ba1341302d0b
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in 25bbf0a6d493
+Removing intermediate container 25bbf0a6d493
+ ---> b3e124aba8ec
+Successfully built b3e124aba8ec
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+docker: Error response from daemon: driver failed programming external connectivity on endpoint quirky_engelbart (f80a81d904f564d4f5ff7158bf521226a44b73ad05eb5d9b7d608f2b8de0549d): Bind for 0.0.0.0:80 failed: port is already allocated.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+docker: Error response from daemon: driver failed programming external connectivity on endpoint festive_neumann (b291912b9872e594de1308173c418461d9d4239ef00bfbf75ac8ec9835f8c781): Bind for 0.0.0.0:80 failed: port is already allocated.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                     NAMES
+4ea07dfdb7d0        a22d6dfe4d46        "gunicorn -b :8080 m…"   5 minutes ago       Up 5 minutes        0.0.0.0:80->8080/tcp      great_kilby
+242cedc3aec9        a22d6dfe4d46        "gunicorn -b :8080 m…"   7 minutes ago       Up 7 minutes        0.0.0.0:32768->8080/tcp   zealous_euclid
+a50edfa385bb        a22d6dfe4d46        "gunicorn -b :8080 m…"   14 minutes ago      Up 14 minutes                                 youthful_hodgkin
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop 4ea07dfdb7d0
+4ea07dfdb7d0
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop 242cedc3aec9
+242cedc3aec9
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop a50edfa385bb
+a50edfa385bb
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 15:25:29 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 15:25:29 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 15:25:29 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 15:25:29 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 15:25:29,929 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 15:25:36,848 - main - ERROR - Received
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+bd7619a43d6f        jwt-api-test        "gunicorn -b :8080 m…"   15 minutes ago      Up 15 minutes       0.0.0.0:80->8080/tcp   elegant_spence
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop bd7619a43d6f
+bd7619a43d6f
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 85424cb617fe
+Step 3/6 : WORKDIR /app
+ ---> Running in 2673567efe9d
+Removing intermediate container 2673567efe9d
+ ---> 493a4fb477b8
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 5817af434a14
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 5817af434a14
+ ---> 2aea153c3230
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in 79e3b2de9ee7
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, MarkupSafe, Jinja2, Werkzeug, click, itsdangerous, flask, gunicorn, wcwidth, zipp, importlib-metadata, pluggy, py, more-itertools, six, pyparsing, packaging, attrs, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container 79e3b2de9ee7
+ ---> 5ffd4650e595
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in b62634f6ecef
+Removing intermediate container b62634f6ecef
+ ---> 22f81865b44d
+Successfully built 22f81865b44d
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 15:41:02 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 15:41:02 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 15:41:02 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 15:41:02 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 15:41:02,330 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 15:41:11,469 - main - ERROR - Received
+2020-06-25 16:38:12,370 - main - ERROR - Received
+2020-06-25 16:39:36,909 - main - ERROR - Received
+2020-06-25 16:39:36,909 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 71, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+2020-06-25 16:40:41,284 - main - ERROR - Received
+2020-06-25 16:41:31,034 - main - ERROR - Received
+2020-06-25 16:41:59,903 - main - ERROR - Received
+2020-06-25 16:41:59,903 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 71, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+2020-06-25 16:42:09,260 - main - ERROR - Received
+2020-06-25 16:42:09,260 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 71, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+2020-06-25 16:42:19,072 - main - ERROR - Received
+2020-06-25 16:42:19,072 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 71, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+f78d930759e3        jwt-api-test        "gunicorn -b :8080 m…"   About an hour ago   Up About an hour    0.0.0.0:80->8080/tcp   amazing_sinoussi
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop f78d930759e3
+f78d930759e3
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 8ba34d8890bf
+Step 3/6 : WORKDIR /app
+ ---> Running in 42ab3cc600b7
+Removing intermediate container 42ab3cc600b7
+ ---> c5126a7f5827
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 255b60eeb131
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 255b60eeb131
+ ---> 6dd5bdc39a2c
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in 158c40fad8b6
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, MarkupSafe, Jinja2, itsdangerous, Werkzeug, click, flask, gunicorn, wcwidth, py, zipp, importlib-metadata, more-itertools, pluggy, six, pyparsing, packaging, attrs, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container 158c40fad8b6
+ ---> c9e6a2f627af
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in ca2a72cbf93e
+Removing intermediate container ca2a72cbf93e
+ ---> e74b3e801d54
+Successfully built e74b3e801d54
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 16:46:35 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 16:46:35 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 16:46:35 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 16:46:35 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 16:46:35,980 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 16:46:49,814 - main - ERROR - Received
+2020-06-25 16:47:00,907 - main - ERROR - Received
+2020-06-25 16:47:16,875 - main - ERROR - Received
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+de08d602a33e        jwt-api-test        "gunicorn -b :8080 m…"   2 minutes ago       Up 2 minutes        0.0.0.0:80->8080/tcp   elegant_euclid
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop de08d602a33e
+de08d602a33e
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> d387d62577a7
+Step 3/6 : WORKDIR /app
+ ---> Running in 9d579fefcf47
+Removing intermediate container 9d579fefcf47
+ ---> 380a95edf363
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 8b8883420097
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 8b8883420097
+ ---> fb0b943e9bf6
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in c0ab924eed9f
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, MarkupSafe, Jinja2, Werkzeug, click, itsdangerous, flask, gunicorn, more-itertools, wcwidth, zipp, importlib-metadata, pluggy, attrs, six, pyparsing, packaging, py, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container c0ab924eed9f
+ ---> f7390d154c5b
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in 17bcb99387a5
+Removing intermediate container 17bcb99387a5
+ ---> d410119aae04
+Successfully built d410119aae04
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 16:49:29 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 16:49:29 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 16:49:29 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 16:49:29 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 16:49:29,360 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 16:49:34,559 - main - ERROR - Received
+2020-06-25 16:49:40,399 - main - ERROR - Received
+2020-06-25 16:50:10,575 - main - ERROR - Received
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED              STATUS              PORTS                  NAMES
+35e0e4132848        jwt-api-test        "gunicorn -b :8080 m…"   About a minute ago   Up 59 seconds       0.0.0.0:80->8080/tcp   pensive_cartwright
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop 35e0e4132848
+35e0e4132848
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 5f1297e592ac
+Step 3/6 : WORKDIR /app
+ ---> Running in 5139f6dd6db8
+Removing intermediate container 5139f6dd6db8
+ ---> e9dc04c5dd64
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in fac6b7390366
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container fac6b7390366
+ ---> c215cf08fee5
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in c872c17f95d4
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Installing collected packages: pyjwt, MarkupSafe, Jinja2, itsdangerous, click, Werkzeug, flask, gunicorn, more-itertools, zipp, importlib-metadata, pluggy, pyparsing, six, packaging, attrs, wcwidth, py, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container c872c17f95d4
+ ---> 4670202b938e
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in 20ce758fabd9
+Removing intermediate container 20ce758fabd9
+ ---> c2434913774f
+Successfully built c2434913774f
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 16:51:40 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 16:51:40 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 16:51:40 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 16:51:40 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 16:51:40,134 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 16:51:43,710 - main - ERROR - Receivedv2
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+0a80c2e4cd71        jwt-api-test        "gunicorn -b :8080 m…"   56 seconds ago      Up 56 seconds       0.0.0.0:80->8080/tcp   angry_vaughan
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop 0a80c2e4cd71
+0a80c2e4cd71
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker build --tag jwt-api-test .
+Sending build context to Docker daemon  118.3kB
+Step 1/6 : FROM python:stretch
+ ---> b9d77e48a75c
+Step 2/6 : COPY . /app
+ ---> 6b13696c864b
+Step 3/6 : WORKDIR /app
+ ---> Running in d46e5643ebe2
+Removing intermediate container d46e5643ebe2
+ ---> ecd3f1485572
+Step 4/6 : RUN pip install --upgrade pip
+ ---> Running in 8b6a8df0dfba
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/43/84/23ed6a1796480a6f1a2d38f2802901d078266bda38388954d01d3f2e821d/pip-20.1.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 19.2.3
+    Uninstalling pip-19.2.3:
+      Successfully uninstalled pip-19.2.3
+Successfully installed pip-20.1.1
+Removing intermediate container 8b6a8df0dfba
+ ---> 28304f63b731
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Running in 4e4256502e56
+Collecting pyjwt
+  Downloading PyJWT-1.7.1-py2.py3-none-any.whl (18 kB)
+Collecting flask
+  Downloading Flask-1.1.2-py2.py3-none-any.whl (94 kB)
+Collecting gunicorn
+  Downloading gunicorn-20.0.4-py2.py3-none-any.whl (77 kB)
+Collecting pytest
+  Downloading pytest-5.4.3-py3-none-any.whl (248 kB)
+Collecting Jinja2>=2.10.1
+  Downloading Jinja2-2.11.2-py2.py3-none-any.whl (125 kB)
+Collecting itsdangerous>=0.24
+  Downloading itsdangerous-1.1.0-py2.py3-none-any.whl (16 kB)
+Collecting Werkzeug>=0.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting click>=5.1
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Requirement already satisfied: setuptools>=3.0 in /usr/local/lib/python3.7/site-packages (from gunicorn->-r requirements.txt (line 3)) (41.2.0)
+Collecting py>=1.5.0
+  Downloading py-1.9.0-py2.py3-none-any.whl (99 kB)
+Collecting attrs>=17.4.0
+  Downloading attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Downloading importlib_metadata-1.6.1-py2.py3-none-any.whl (31 kB)
+Collecting more-itertools>=4.0.0
+  Downloading more_itertools-8.4.0-py3-none-any.whl (43 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Collecting pluggy<1.0,>=0.12
+  Downloading pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting packaging
+  Downloading packaging-20.4-py2.py3-none-any.whl (37 kB)
+Collecting MarkupSafe>=0.23
+  Downloading MarkupSafe-1.1.1-cp37-cp37m-manylinux1_x86_64.whl (27 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Collecting six
+  Downloading six-1.15.0-py2.py3-none-any.whl (10 kB)
+Collecting pyparsing>=2.0.2
+  Downloading pyparsing-2.4.7-py2.py3-none-any.whl (67 kB)
+Installing collected packages: pyjwt, MarkupSafe, Jinja2, itsdangerous, Werkzeug, click, flask, gunicorn, py, attrs, zipp, importlib-metadata, more-itertools, wcwidth, pluggy, six, pyparsing, packaging, pytest
+Successfully installed Jinja2-2.11.2 MarkupSafe-1.1.1 Werkzeug-1.0.1 attrs-19.3.0 click-7.1.2 flask-1.1.2 gunicorn-20.0.4 importlib-metadata-1.6.1 itsdangerous-1.1.0 more-itertools-8.4.0 packaging-20.4 pluggy-0.13.1 py-1.9.0 pyjwt-1.7.1 pyparsing-2.4.7 pytest-5.4.3 six-1.15.0 wcwidth-0.2.5 zipp-3.1.0
+Removing intermediate container 4e4256502e56
+ ---> ab6b224f50e1
+Step 6/6 : ENTRYPOINT ["gunicorn", "-b", ":8080", "main:APP"]
+ ---> Running in 86029be24043
+Removing intermediate container 86029be24043
+ ---> f4ddd222d1bf
+Successfully built f4ddd222d1bf
+Successfully tagged jwt-api-test:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker run -p 80:8080 --env-file=.env jwt-api-test
+[2020-06-25 16:54:17 +0000] [1] [INFO] Starting gunicorn 20.0.4
+[2020-06-25 16:54:17 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+[2020-06-25 16:54:17 +0000] [1] [INFO] Using worker: sync
+[2020-06-25 16:54:17 +0000] [8] [INFO] Booting worker with pid: 8
+2020-06-25 16:54:17,470 - main - DEBUG - Starting with log level: DEBUG
+2020-06-25 16:54:20,672 - main - ERROR - Received
+2020-06-25 16:54:20,672 - main - ERROR - Receivedv2
+2020-06-25 16:54:52,416 - main - ERROR - Received
+2020-06-25 16:54:52,417 - main - ERROR - Receivedv2
+2020-06-25 16:54:52,417 - main - ERROR - extracted JSON
+2020-06-25 16:54:52,417 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 73, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+2020-06-25 16:55:27,757 - main - ERROR - Received
+2020-06-25 16:55:27,757 - main - ERROR - Receivedv2
+2020-06-25 16:55:44,859 - main - ERROR - Received
+2020-06-25 16:55:44,859 - main - ERROR - Receivedv2
+2020-06-25 16:55:53,933 - main - ERROR - Received
+2020-06-25 16:55:53,933 - main - ERROR - Receivedv2
+2020-06-25 16:56:03,619 - main - ERROR - Received
+2020-06-25 16:56:03,619 - main - ERROR - Receivedv2
+2020-06-25 16:56:03,619 - main - ERROR - extracted JSON
+2020-06-25 16:56:03,619 - main - ERROR - Exception on /auth [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/app/main.py", line 73, in auth
+    if 'email' not in request_data:
+TypeError: argument of type 'NoneType' is not iterable
+2020-06-25 16:58:53,066 - main - ERROR - Received
+2020-06-25 16:58:53,066 - main - ERROR - Receivedv2
+2020-06-25 16:59:10,091 - main - ERROR - Received
+2020-06-25 16:59:10,091 - main - ERROR - Receivedv2
+2020-06-25 16:59:32,136 - main - ERROR - Received
+2020-06-25 16:59:32,136 - main - ERROR - Receivedv2
+2020-06-25 16:59:49,476 - main - ERROR - Received
+2020-06-25 16:59:49,476 - main - ERROR - Receivedv2
+2020-06-25 16:59:49,476 - main - ERROR - extracted JSON
+2020-06-25 16:59:49,476 - main - ERROR - NoException
+2020-06-25 16:59:49,476 - main - ERROR - userBodied
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                  NAMES
+0f65bfd7b2ef        jwt-api-test        "gunicorn -b :8080 m…"   About an hour ago   Up About an hour    0.0.0.0:80->8080/tcp   optimistic_shaw
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>docker stop 0f65bfd7b2ef
+0f65bfd7b2ef
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>eksctl create cluster --name simple-jwt-api
+[ℹ]  eksctl version 0.22.0
+[ℹ]  using region us-west-2
+[ℹ]  setting availability zones to [us-west-2a us-west-2b us-west-2c]
+[ℹ]  subnets for us-west-2a - public:192.168.0.0/19 private:192.168.96.0/19
+[ℹ]  subnets for us-west-2b - public:192.168.32.0/19 private:192.168.128.0/19
+[ℹ]  subnets for us-west-2c - public:192.168.64.0/19 private:192.168.160.0/19
+[ℹ]  nodegroup "ng-7d7ffa2a" will use "ami-06e2c973f2d0373fa" [AmazonLinux2/1.16]
+[ℹ]  using Kubernetes version 1.16
+[ℹ]  creating EKS cluster "simple-jwt-api" in "us-west-2" region with un-managed nodes
+[ℹ]  will create 2 separate CloudFormation stacks for cluster itself and the initial nodegroup
+[ℹ]  if you encounter any issues, check CloudFormation console or try 'eksctl utils describe-stacks --region=us-west-2 --cluster=simple-jwt-api'
+[ℹ]  CloudWatch logging will not be enabled for cluster "simple-jwt-api" in "us-west-2"
+[ℹ]  you can enable it with 'eksctl utils update-cluster-logging --region=us-west-2 --cluster=simple-jwt-api'
+[ℹ]  Kubernetes API endpoint access will use default of {publicAccess=true, privateAccess=false} for cluster "simple-jwt-api" in "us-west-2"
+[ℹ]  2 sequential tasks: { create cluster control plane "simple-jwt-api", 2 sequential sub-tasks: { no tasks, create nodegroup "ng-7d7ffa2a" } }
+[ℹ]  building cluster stack "eksctl-simple-jwt-api-cluster"
+[ℹ]  deploying stack "eksctl-simple-jwt-api-cluster"
+[ℹ]  building nodegroup stack "eksctl-simple-jwt-api-nodegroup-ng-7d7ffa2a"
+[ℹ]  --nodes-min=2 was set automatically for nodegroup ng-7d7ffa2a
+[ℹ]  --nodes-max=2 was set automatically for nodegroup ng-7d7ffa2a
+[ℹ]  deploying stack "eksctl-simple-jwt-api-nodegroup-ng-7d7ffa2a"
+[ℹ]  waiting for the control plane availability...
+[!]  unable to write kubeconfig , please retry with 'eksctl utils write-kubeconfig -n simple-jwt-api': unable to read existing kubeconfig file "C:\\Users\\balazs.szalai/.kube/config": error loading config file "C:\Users\balazs.szalai/.kube/config": read C:\Users\balazs.szalai/.kube/config: The process cannot access the file because another process has locked a portion of the file.
+[ℹ]  no tasks
+[✔]  all EKS cluster resources for "simple-jwt-api" have been created
+[ℹ]  adding identity "arn:aws:iam::834390252854:role/eksctl-simple-jwt-api-nodegroup-n-NodeInstanceRole-1MTYNTXUIGLR4" to auth ConfigMap
+[ℹ]  nodegroup "ng-7d7ffa2a" has 0 node(s)
+[ℹ]  waiting for at least 2 node(s) to become ready in "ng-7d7ffa2a"
+[ℹ]  nodegroup "ng-7d7ffa2a" has 2 node(s)
+[ℹ]  node "ip-192-168-47-200.us-west-2.compute.internal" is ready
+[ℹ]  node "ip-192-168-78-101.us-west-2.compute.internal" is ready
+[✖]  parsing kubectl version string  (upstream error: error: error loading config file "C:\Users\balazs.szalai/.kube/config": read C:\Users\balazs.szalai/.kube/config: The process cannot access the file because another process has locked a portion of the file.
+) / "0.0.0": Version string empty
+[ℹ]  cluster should be functional despite missing (or misconfigured) client binaries
+[✔]  EKS cluster "simple-jwt-api" in "us-west-2" region is ready
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+aws: error: the following arguments are required: command
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws sts get-caller-identity --query Account --output text
+834390252854
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam create-role --role-name UdacityFlaskDeployCBKubectlRole --assume-role-policy-document "{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"arn:aws:iam::834390252854:root\" }, \"Action\": \"sts:AssumeRole\" } ] }" --output text --query 'Role.Arn'
+Role.Arn
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>echo hehe
+hehe
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>echo '{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": [ "eks:Describe*", "ssm:GetParameters" ], "Resource": "*" } ] }' > iam-role-policy
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam put-role-policy --role-name UdacityFlaskDeployCBKubectlRole --policy-name eks-describe --policy-document file:iam-role-policy
+
+An error occurred (MalformedPolicyDocument) when calling the PutRolePolicy operation: Syntax errors in policy.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam put-role-policy --role-name UdacityFlaskDeployCBKubectlRole --policy-name eks-describe --policy-document file:"C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo\iam-role-policy"
+
+An error occurred (MalformedPolicyDocument) when calling the PutRolePolicy operation: Syntax errors in policy.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam put-role-policy --role-name UdacityFlaskDeployCBKubectlRole --policy-name eks-describe --policy-document file:"C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo\iam-role-policy"
+
+An error occurred (MalformedPolicyDocument) when calling the PutRolePolicy operation: Syntax errors in policy.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam put-role-policy --role-name UdacityFlaskDeployCBKubectlRole --policy-name eks-describe --policy-document file://iam-role-policy
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get -n kube-system configmap/aws-auth -o yaml > aws-auth-patch.yml
+error: the server doesn't have a resource type "configmap"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl describe configmap -n kube-system aws-auth
+error: the server doesn't have a resource type "configmap"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get -n kube-system configmap/aws-auth -o yaml > aws-auth-patch.yml
+error: the server doesn't have a resource type "configmap"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>curl -o aws-auth-cm.yaml https://amazon-eks.s3.us-west-2.amazonaws.com/cloudformation/2020-03-23/aws-auth-cm.yaml
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   282  100   282    0     0    282      0  0:00:01 --:--:--  0:00:01   501
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl apply -f aws-auth-cm.yaml
+error: unable to recognize "aws-auth-cm.yaml": no matches for kind "ConfigMap" in version "v1"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl patch configmap/aws-auth -n kube-system --patch "aws-auth-patch.yml"
+error: the server doesn't have a resource type "configmap"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>for /f %i in ('aws sts get-caller-identity --query Account --output text') do set ACCOUNT_ID=%i
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>set ACCOUNT_ID=834390252854
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>set TRUST="{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"arn:aws:iam::%ACCOUNT_ID%:root\" }, \"Action\": \"sts:AssumeRole\" } ] }"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam create-role --role-name UdacityFlaskDeployCBKubectlRole --assume-role-policy-document %TRUST% --output text --query 'Role.Arn'
+Role.Arn
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>set EKS_DESCRIBE="{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Action\": [ \"eks:Describe*\", \"ssm:GetParameters\" ], \"Resource\": \"*\" } ] }"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>echo %EKS_DESCRIBE%
+"{ \"Version\": \"2012-10-17\", \"Statement\": [ { \"Effect\": \"Allow\", \"Action\": [ \"eks:Describe*\", \"ssm:GetParameters\" ], \"Resource\": \"*\" } ] }"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws iam put-role-policy --role-name UdacityFlaskDeployCBKubectlRole --policy-name eks-describe --policy-document %EKS_DESCRIBE%
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get -n kube-system configmap/aws-auth -o yaml > %USERPROFILE%\AppData\Local\Temp\aws-auth-patch.yml
+error: the server doesn't have a resource type "configmap"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl version --client
+Client Version: version.Info{Major:"1", Minor:"16+", GitVersion:"v1.16.6-beta.0", GitCommit:"e7f962ba86f4ce7033828210ca3556393c377bcc", GitTreeState:"clean", BuildDate:"2020-01-15T08:26:26Z", GoVersion:"go1.13.5", Compiler:"gc", Platform:"windows/amd64"}
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl version --server
+Error: flag needs an argument: --server
+
+
+Examples:
+  # Print the client and server versions for the current context
+  kubectl version
+
+Options:
+      --client=false: Client version only (no server required).
+  -o, --output='': One of 'yaml' or 'json'.
+      --short=false: Print just the version number.
+
+Usage:
+  kubectl version [flags] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl version
+Client Version: version.Info{Major:"1", Minor:"16+", GitVersion:"v1.16.6-beta.0", GitCommit:"e7f962ba86f4ce7033828210ca3556393c377bcc", GitTreeState:"clean", BuildDate:"2020-01-15T08:26:26Z", GoVersion:"go1.13.5", Compiler:"gc", Platform:"windows/amd64"}
+Error from server (NotFound): the server could not find the requested resource
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl describe
+error: You must specify the type of resource to describe. Use "kubectl api-resources" for a complete list of supported resources.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl version -v=8
+I0625 15:22:15.810081   18328 loader.go:375] Config loaded from file:  C:\Users\balazs.szalai/.kube/config
+I0625 15:22:15.812080   18328 round_trippers.go:420] GET http://localhost:8080/version?timeout=32s
+I0625 15:22:15.812080   18328 round_trippers.go:427] Request Headers:
+I0625 15:22:15.812080   18328 round_trippers.go:431]     Accept: application/json, */*
+I0625 15:22:15.813045   18328 round_trippers.go:431]     User-Agent: kubectl/v1.16.6 (windows/amd64) kubernetes/e7f962b
+I0625 15:22:16.117741   18328 round_trippers.go:446] Response Status: 404 Not Found in 304 milliseconds
+I0625 15:22:16.117741   18328 round_trippers.go:449] Response Headers:
+I0625 15:22:16.123707   18328 round_trippers.go:452]     Connection: Keep-Alive
+I0625 15:22:16.125695   18328 round_trippers.go:452]     Server: Embedthis-http
+I0625 15:22:16.128695   18328 round_trippers.go:452]     Cache-Control: no-cache
+I0625 15:22:16.131691   18328 round_trippers.go:452]     Date: Thu, 25 Jun 2020 19:22:16 GMT
+I0625 15:22:16.136726   18328 round_trippers.go:452]     Content-Length: 176
+I0625 15:22:16.138683   18328 round_trippers.go:452]     Keep-Alive: timeout=60, max=199
+I0625 15:22:16.142734   18328 request.go:968] Response Body: <!DOCTYPE html>
+<html><head><title>Not Found</title></head>
+<body>
+<h2>Access Error: 404 -- Not Found</h2>
+<pre>Cannot open document for: /version</pre>
+</body>
+</html>
+Client Version: version.Info{Major:"1", Minor:"16+", GitVersion:"v1.16.6-beta.0", GitCommit:"e7f962ba86f4ce7033828210ca3556393c377bcc", GitTreeState:"clean", BuildDate:"2020-01-15T08:26:26Z", GoVersion:"go1.13.5", Compiler:"gc", Platform:"windows/amd64"}
+I0625 15:22:16.148681   18328 helpers.go:199] server response object: [{
+  "metadata": {},
+  "status": "Failure",
+  "message": "the server could not find the requested resource",
+  "reason": "NotFound",
+  "details": {
+    "causes": [
+      {
+        "reason": "UnexpectedServerResponse",
+        "message": "\u003c!DOCTYPE html\u003e\r\n\u003chtml\u003e\u003chead\u003e\u003ctitle\u003eNot Found\u003c/title\u003e\u003c/head\u003e\r\n\u003cbody\u003e\r\n\u003ch2\u003eAccess Error: 404 -- Not Found\u003c/h2\u003e\r\n\u003cpre\u003eCannot open document for: /version\u003c/pre\u003e\r\n\u003c/body\u003e\r\n\u003c/html\u003e"
+      }
+    ]
+  },
+  "code": 404
+}]
+F0625 15:22:16.150681   18328 helpers.go:114] Error from server (NotFound): the server could not find the requested resource
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>minikube status
+'minikube' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl cluster-info
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+error: the server doesn't have a resource type "services"
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl cluster-info dump
+Error from server (NotFound): the server could not find the requested resource (get nodes)
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws --version
+aws-cli/2.0.25 Python/3.7.7 Windows/10 botocore/2.0.0dev29
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws --region
+usage: aws [options] <command> <subcommand> [<subcommand> ...] [parameters]
+To see help text, you can run:
+
+  aws help
+  aws <command> help
+  aws <command> <subcommand> help
+aws: error: argument --region: expected one argument
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws --version
+aws-cli/2.0.25 Python/3.7.7 Windows/10 botocore/2.0.0dev29
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws eks --region us-west-2 update-kubeconfig --name simple-jwt-api
+Added new context arn:aws:eks:us-west-2:834390252854:cluster/simple-jwt-api to C:\Users\balazs.szalai\.kube\config
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl cluster-info
+Kubernetes master is running at https://038340C0909FAE818BF3A7AA4789AA31.gr7.us-west-2.eks.amazonaws.com
+CoreDNS is running at https://038340C0909FAE818BF3A7AA4789AA31.gr7.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get -n kube-system configmap/aws-auth -o yaml > %USERPROFILE%\AppData\Local\Temp\aws-auth-patch.yml
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>echo %ACCOUNT_ID%
+834390252854
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl patch configmap/aws-auth -n kube-system --patch "$(cat $USERPROFILE/AppData/Local/Temp/aws-auth-patch.yml)"
+Error from server (BadRequest): json: cannot unmarshal string into Go value of type map[string]interface {}
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl patch configmap/aws-auth -n kube-system --patch "C:\Users\balazs.szalai\AppData\Local\Temp\aws-auth-patch.yml"
+Error from server (BadRequest): json: cannot unmarshal string into Go value of type map[string]interface {}
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws ssm put-parameter --name JWT_SECRET --value "166584dbed4b6b5cd4e1ba0ade4d73f34282a021" --type SecureString
+You must specify a region. You can also configure your region by running "aws configure".
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws ssm put-parameter --region us-west-2 --name JWT_SECRET --value "166584dbed4b6b5cd4e1ba0ade4d73f34282a021" --type SecureString
+{
+    "Version": 1,
+    "Tier": "Standard"
+}
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws configure list
+      Name                    Value             Type    Location
+      ----                    -----             ----    --------
+   profile                <not set>             None    None
+access_key     ****************XDYE shared-credentials-file
+secret_key     ****************RJEa shared-credentials-file
+    region                <not set>             None    None
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws configure set default.region us-east-2
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws ssm put-parameter --name JWT_SECRET --value "166584dbed4b6b5cd4e1ba0ade4d73f34282a021" --type SecureString
+{
+    "Version": 1,
+    "Tier": "Standard"
+}
+
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws configure set default.region us-west-2
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>aws ssm put-parameter --name JWT_SECRET --value "166584dbed4b6b5cd4e1ba0ade4d73f34282a021" --type SecureString
+
+An error occurred (ParameterAlreadyExists) when calling the PutParameter operation: The parameter already exists. To overwrite this value, set the overwrite option in the request to true.
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get services simple-jwt-api -o wide
+NAME             TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)        AGE   SELECTOR
+simple-jwt-api   LoadBalancer   10.100.132.171   a4c69d8c1136043ad97f55db286fb500-764838815.us-west-2.elb.amazonaws.com   80:31161/TCP   49s   app=simple-jwt-api
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>curl -X GET a4c69d8c1136043ad97f55db286fb500-764838815.us-west-2.elb.amazonaws.com/
+curl: (52) Empty reply from server
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>kubectl get -n kube-system configmap/aws-auth -o yaml > %USERPROFILE%\AppData\Local\Temp\aws-auth-patch.yml
+
+C:\Users\balazs.szalai\Dropbox (Altaeros)\Working Folder - Balazs Szalai\Personal\Udacity\deployment-demo>
